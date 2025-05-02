@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello Pookie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Pacifico', cursive;
+      background: linear-gradient(to top right, #ffc2d1, #fce1e4);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero {
+      z-index: 2;
+      padding: 2rem;
+    }
+
+    h1 {
+  font-size: 2.3rem;
+  line-height: 1.2;
+  color: #d63384;
+  white-space: nowrap;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .btn-custom {
+      margin-top: 2rem;
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #ff1493;
+    }
+
+    /* Heart Animation */
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: float 8s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts -->
+  <div class="hearts" id="hearts-container"></div>
+
+  <!-- Main Content -->
+  <div class="hero">
+  <h1>HELLO POOKIE 💖</h1>
+  <p>I have some questions for YOU<br><br>Let's play a game...</p>
+  <button class="btn-custom" onclick="nextQuestion()">
+    OKAY, Let's go
+  </button>
+</div>
+
+  <script>
+    // Generate hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+      document.getElementById("hearts-container").appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+<script>
+  // Floating hearts (already there)
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+    document.getElementById("hearts-container").appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+  }
+  setInterval(createHeart, 300);
+
+  // New function for changing content
+  function nextQuestion() {
+    const hero = document.querySelector('.hero');
+    hero.innerHTML = `
+      <p style="font-size: 1.3rem;">
+        I want a promise from you.<br>
+        Whatever you answer,<br>
+        promise you'll give it with all your heart. 💖
+      </p>
+      <button class="btn-custom" onclick="alert('Promise accepted! 💝')">Promise 💖</button>
+    `;
+  }
+</script>
+<script>
+  // Floating hearts animation
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+    document.getElementById("hearts-container").appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+  }
+  setInterval(createHeart, 300);
+
+  // Step 1: From "OKAY, Let's go"
+  function nextQuestion() {
+    const hero = document.querySelector('.hero');
+    hero.innerHTML = `
+      <p style="font-size: 1.3rem;">
+        I want a promise from you.<br>
+        Whatever you answer,<br>
+        promise you'll give it with all your heart. 💖
+      </p>
+      <button class="btn-custom" onclick="firstQuestion()">Promise 💖</button>
+    `;
+  }
+
+  // Step 2: Ask first question
+  function firstQuestion() {
+    const hero = document.querySelector('.hero');
+    hero.innerHTML = `
+      <p style="font-size: 1.3rem;">
+        So your first question is:<br>
+        <strong>Kya mein tumhe irritate karti hoon?</strong>
+      </p>
+      <div>
+        <button class="btn-custom" onclick="answerYes()">Yes 🙄</button>
+        <button class="btn-custom" onclick="answerNo()">No 💗</button>
+      </div>
+    `;
+  }
+
+  // Optional: You can define these functions later for next actions
+  function answerYes() {
+     const hero = document.querySelector('.hero');
+  hero.innerHTML = `
+    <p style="font-size: 1.3rem;">
+      <strong>Okay, you have one more chance to select No.</strong>
+    </p>
+    <img src="https://media.giphy.com/media/uqSU9IEYEKAbS/giphy.gif" style="max-width: 100%; height: auto; border-radius: 20px; margin: 1rem 0;">
+    <div>
+      <button class="btn-custom" onclick="goBack()">Go Back</button>
+    </div>
+  `;
+}
+function goBack() {
+  const hero = document.querySelector('.hero');
+  hero.innerHTML = `
+    <p style="font-size: 1.3rem;">
+      So your first question is:<br>
+      <strong>Kya mein tumhe irritate karti hoon?</strong>
+    </p>
+    <div>
+      <button class="btn-custom" onclick="answerNo()">No 💗</button>
+    </div>
+  `;
+}
+
+  function answerNo() {
+  const hero = document.querySelector('.hero');
+  hero.innerHTML = `
+    <p style="font-size: 1.3rem;">
+      AWW My <strong>POOKIE</strong>. 💕<br>
+      Okay, let’s move to <strong>question number two</strong>:<br>
+      Kya mein tumhe pasand hoon?
+    </p>
+    <div>
+      <button class="btn-custom" onclick="answerLikeYes()">Haan ❤️</button>
+      <button class="btn-custom" onclick="answerLikeNo()">Nahi 🙃</button>
+    </div>
+  `;
+}
+function answerLikeYes() {
+  const hero = document.querySelector('.hero');
+  hero.innerHTML = `
+    <p style="font-size: 1.3rem;">
+      <strong>Am I important to you</strong> or<br>
+      <strong>am I just like other girls for you?</strong>
+    </p><br>
+    <textarea id="importantResponse" placeholder="Type your honest answer here..." 
+      style="width: 100%; max-width: 400px; padding: 1rem; border-radius: 12px; border: 1px solid #ccc; font-size: 1rem;"></textarea>
+    <br>
+    <button class="btn-custom" onclick="handleImportanceResponse()">Submit 💬</button>
+  `;
+}
+function handleImportanceResponse() {
+  const input = document.getElementById("importantResponse").value.trim();
+
+  if (!input) {
+    document.getElementById("popup-message").innerText = 
+      "Please write something first, pookie 🥺";
+    document.getElementById("popup").style.display = "flex";
+  } else {
+    // You can continue to the next step here (no popup shown)
+    console.log("Answer received:", input);
+    // Or call a new function like: showFinalMessage(input);
+  }
+}
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+
+</script>
+<!-- Custom Popup -->
+<div id="popup" style="
+  display: none;  /* THIS IS IMPORTANT */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+">
+  <div style="
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  ">
+    <p id="popup-message" style="font-size: 1.2rem;"></p>
+    <button class="btn-custom" onclick="closePopup()">Okay 💌</button>
+  </div>
+</div>
+
+
+</body>
+</html>
