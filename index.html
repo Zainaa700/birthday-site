@@ -162,6 +162,7 @@
   }
 </script>
 <script>
+let isResponseSaved = false;
   // Floating hearts animation
   function createHeart() {
     const heart = document.createElement('div');
@@ -248,8 +249,11 @@ function answerLikeYes() {
       <strong>Am I important to you</strong> or<br>
       <strong>am I just like other girls for you?</strong>
     </p><br>
-    <textarea id="importantResponse" placeholder="Type your honest answer here..." 
-      style="width: 100%; max-width: 400px; padding: 1rem; border-radius: 12px; border: 1px solid #ccc; font-size: 1rem;"></textarea>
+    <div style="display: flex; justify-content: center;">
+  <textarea id="importantResponse" placeholder="Type your honest answer..." 
+    style="width: 100%; max-width: 400px; padding: 1rem; border-radius: 12px; border: 1px solid #ccc; font-size: 1rem;"></textarea>
+</div>
+
     <br>
     <button class="btn-custom" onclick="handleImportanceResponse()">Submit 💬</button>
   `;
@@ -260,17 +264,99 @@ function handleImportanceResponse() {
   if (!input) {
     document.getElementById("popup-message").innerText = 
       "Please write something first, pookie 🥺";
-    document.getElementById("popup").style.display = "flex";
+    isResponseSaved = false;
   } else {
-    // You can continue to the next step here (no popup shown)
-    console.log("Answer received:", input);
-    // Or call a new function like: showFinalMessage(input);
+    document.getElementById("popup-message").innerText = 
+      "Your answer has been successfully saved in my heart forever. ❤️";
+    isResponseSaved = true;
   }
-}
-function closePopup() {
-  document.getElementById("popup").style.display = "none";
+
+  document.getElementById("popup").style.display = "flex";
 }
 
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+
+  if (isResponseSaved) {
+    // Move to Question 4
+    const hero = document.querySelector('.hero');
+    hero.innerHTML = `
+      <p style="font-size: 1.3rem;">
+        <strong>Question 4:</strong> Do you miss me when I’m not around? 🥺
+      </p>
+      <div>
+        <button class="btn-custom" onclick="missYes()">Yes 😢</button>
+        <button class="btn-custom" onclick="missNo()">No 😐</button>
+      </div>
+    `;
+  } else {
+    // Reload the previous textarea screen
+    const hero = document.querySelector('.hero');
+    hero.innerHTML = `
+      <p style="font-size: 1.3rem;">
+        <strong>Am I important to you</strong> or<br>
+        <strong>am I just like other girls for you?</strong>
+      </p><br>
+      <div style="display: flex; justify-content: center;">
+        <textarea id="importantResponse" placeholder="Type your honest answer..." 
+          style="width: 100%; max-width: 400px; padding: 1rem; border-radius: 12px; border: 1px solid #ccc; font-size: 1rem;"></textarea>
+      </div>
+      <br>
+      <button class="btn-custom" onclick="handleImportanceResponse()">Submit 💬</button>
+    `;
+  }
+}
+
+function missYes() {
+  const hero = document.querySelector('.hero');
+  hero.innerHTML = `
+    <p style="font-size: 1.3rem;">
+      Awwww I miss you too, pookie! 💞<br>
+      You're always on my mind. 💭
+    </p>
+    <img src="https://media.giphy.com/media/l4FGGafcOHmrlQxG0/giphy.gif" 
+         style="max-width: 100%; height: auto; border-radius: 20px; margin: 1rem 0;">
+  `;
+}
+
+function missNo() {
+  const hero = document.querySelector('.hero');
+  hero.innerHTML = `
+    <p style="font-size: 1.3rem;">
+      Okay, you know you’re lying 😤<br>
+      But I still love you! 💗 You wanna Try again?<br> So, Do you miss me?
+    </p>
+    <div>
+      <button class="btn-custom" onclick="missYes()">Yes 😢</button>
+    </div>
+  `;
+}
+
+function answerLikeNo() {
+  const hero = document.querySelector('.hero');
+  hero.innerHTML = `
+    <p style="font-size: 1.3rem;">
+      <strong>Okay, you have one more chance to select Haan.</strong>
+    </p>
+    <img src="https://media.giphy.com/media/l4FGGafcOHmrlQxG0/giphy.gif" style="max-width: 100%; height: auto; border-radius: 20px; margin: 1rem 0;">
+    <div>
+      <button class="btn-custom" onclick="goBackToLikeQuestion()">Go Back</button>
+    </div>
+  `;
+}
+function goBackToLikeQuestion() {
+  const hero = document.querySelector('.hero');
+  hero.innerHTML = `
+    <p style="font-size: 1.3rem;">
+      AWW My <strong>POOKIE</strong>. 💕<br>
+      Okay, let’s move to <strong>question number two</strong>:<br>
+      Kya mein tumhe pasand hoon?
+    </p>
+    <div>
+      <button class="btn-custom" onclick="answerLikeYes()">Haan ❤️</button>
+    </div>
+  `;
+}
 
 </script>
 <!-- Custom Popup -->
