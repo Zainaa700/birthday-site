@@ -277,6 +277,12 @@ function handleImportanceResponse() {
 function closePopup() {
   document.getElementById("popup").style.display = "none";
 
+// 💡 This will remove focus from textarea to prevent cursor showing
+  if (document.activeElement) {
+    document.activeElement.blur();
+  }
+
+
   if (isResponseSaved) {
     // Move to Question 4
     const hero = document.querySelector('.hero');
@@ -316,6 +322,9 @@ function missYes() {
     </p>
     <img src="https://media.giphy.com/media/l4FGGafcOHmrlQxG0/giphy.gif" 
          style="max-width: 100%; height: auto; border-radius: 20px; margin: 1rem 0;">
+    <div>
+      <button class="btn-custom" onclick="specialMessage()">Continue 💫</button>
+    </div>
   `;
 }
 
@@ -338,7 +347,7 @@ function answerLikeNo() {
     <p style="font-size: 1.3rem;">
       <strong>Okay, you have one more chance to select Haan.</strong>
     </p>
-    <img src="https://media.giphy.com/media/l4FGGafcOHmrlQxG0/giphy.gif" style="max-width: 100%; height: auto; border-radius: 20px; margin: 1rem 0;">
+    <img src="https://media.giphy.com/media/uqSU9IEYEKAbS/giphy.gif" style="max-width: 100%; height: auto; border-radius: 20px; margin: 1rem 0;">
     <div>
       <button class="btn-custom" onclick="goBackToLikeQuestion()">Go Back</button>
     </div>
@@ -354,6 +363,19 @@ function goBackToLikeQuestion() {
     </p>
     <div>
       <button class="btn-custom" onclick="answerLikeYes()">Haan ❤️</button>
+    </div>
+  `;
+}
+function specialMessage() {
+  const hero = document.querySelector('.hero');
+  hero.innerHTML = `
+    <p style="font-size: 1.3rem;">
+      Okay, so as it is your special day 💝<br>
+      I want to tell you something...<br>
+      <strong>Are you ready?</strong>
+    </p>
+    <div>
+      <button class="btn-custom" onclick="openGift()">Open Gift 🎁</button>
     </div>
   `;
 }
